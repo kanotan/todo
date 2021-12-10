@@ -10,6 +10,11 @@
       "StackName": "amplify-todo-production-41558",
       "StackId": "arn:aws:cloudformation:ap-northeast-1:806022934947:stack/amplify-todo-production-41558/72969a50-5924-11ec-bfb9-0696733e6b2f",
       "AmplifyAppId": "d3j2vzgxaqqviq"
+    },
+    "categories": {
+      "auth": {
+        "todoca22ff71": {}
+      }
     }
   }
 }
