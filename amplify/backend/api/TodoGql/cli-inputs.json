@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "serviceConfiguration": {
+    "apiName": "TodoGql",
+    "serviceName": "AppSync",
+    "gqlSchemaPath": "/Users/kanotan/workspace/todo/amplify/backend/api/TodoGql/schema.graphql",
+    "defaultAuthType": {
+      "mode": "AMAZON_COGNITO_USER_POOLS",
+      "cognitoUserPoolId": "authtodoca22ff71"
+    },
+    "additionalAuthTypes": [
+      {
+        "mode": "API_KEY",
+        "expirationTime": 365,
+        "apiKeyExpirationDate": "2022-12-12T20:45:35.078Z",
+        "keyDescription": ""
+      }
+    ]
+  }
+}

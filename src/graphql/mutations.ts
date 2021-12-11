@@ -14,6 +14,16 @@ export const createBoard = /* GraphQL */ `
       createdAt
       updatedAt
       posts {
+        items {
+          id
+          title
+          content
+          status
+          owner
+          createdAt
+          updatedAt
+          boardID
+        }
         nextToken
       }
     }
@@ -31,6 +41,16 @@ export const updateBoard = /* GraphQL */ `
       createdAt
       updatedAt
       posts {
+        items {
+          id
+          title
+          content
+          status
+          owner
+          createdAt
+          updatedAt
+          boardID
+        }
         nextToken
       }
     }
@@ -48,6 +68,16 @@ export const deleteBoard = /* GraphQL */ `
       createdAt
       updatedAt
       posts {
+        items {
+          id
+          title
+          content
+          status
+          owner
+          createdAt
+          updatedAt
+          boardID
+        }
         nextToken
       }
     }
@@ -73,6 +103,9 @@ export const createPost = /* GraphQL */ `
         owner
         createdAt
         updatedAt
+        posts {
+          nextToken
+        }
       }
     }
   }
@@ -97,6 +130,9 @@ export const updatePost = /* GraphQL */ `
         owner
         createdAt
         updatedAt
+        posts {
+          nextToken
+        }
       }
     }
   }
@@ -121,6 +157,9 @@ export const deletePost = /* GraphQL */ `
         owner
         createdAt
         updatedAt
+        posts {
+          nextToken
+        }
       }
     }
   }

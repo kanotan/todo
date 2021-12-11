@@ -3,50 +3,80 @@
 // this is an auto generated file. This will be overwritten
 
 export const onCreateBoard = /* GraphQL */ `
-  subscription OnCreateBoard {
-    onCreateBoard {
+  subscription OnCreateBoard($owner: String) {
+    onCreateBoard(owner: $owner) {
       id
       name
       owner
       createdAt
       updatedAt
       posts {
+        items {
+          id
+          title
+          content
+          status
+          owner
+          createdAt
+          updatedAt
+          boardID
+        }
         nextToken
       }
     }
   }
 `;
 export const onUpdateBoard = /* GraphQL */ `
-  subscription OnUpdateBoard {
-    onUpdateBoard {
+  subscription OnUpdateBoard($owner: String) {
+    onUpdateBoard(owner: $owner) {
       id
       name
       owner
       createdAt
       updatedAt
       posts {
+        items {
+          id
+          title
+          content
+          status
+          owner
+          createdAt
+          updatedAt
+          boardID
+        }
         nextToken
       }
     }
   }
 `;
 export const onDeleteBoard = /* GraphQL */ `
-  subscription OnDeleteBoard {
-    onDeleteBoard {
+  subscription OnDeleteBoard($owner: String) {
+    onDeleteBoard(owner: $owner) {
       id
       name
       owner
       createdAt
       updatedAt
       posts {
+        items {
+          id
+          title
+          content
+          status
+          owner
+          createdAt
+          updatedAt
+          boardID
+        }
         nextToken
       }
     }
   }
 `;
 export const onCreatePost = /* GraphQL */ `
-  subscription OnCreatePost {
-    onCreatePost {
+  subscription OnCreatePost($owner: String) {
+    onCreatePost(owner: $owner) {
       id
       title
       content
@@ -61,13 +91,16 @@ export const onCreatePost = /* GraphQL */ `
         owner
         createdAt
         updatedAt
+        posts {
+          nextToken
+        }
       }
     }
   }
 `;
 export const onUpdatePost = /* GraphQL */ `
-  subscription OnUpdatePost {
-    onUpdatePost {
+  subscription OnUpdatePost($owner: String) {
+    onUpdatePost(owner: $owner) {
       id
       title
       content
@@ -82,13 +115,16 @@ export const onUpdatePost = /* GraphQL */ `
         owner
         createdAt
         updatedAt
+        posts {
+          nextToken
+        }
       }
     }
   }
 `;
 export const onDeletePost = /* GraphQL */ `
-  subscription OnDeletePost {
-    onDeletePost {
+  subscription OnDeletePost($owner: String) {
+    onDeletePost(owner: $owner) {
       id
       title
       content
@@ -103,6 +139,9 @@ export const onDeletePost = /* GraphQL */ `
         owner
         createdAt
         updatedAt
+        posts {
+          nextToken
+        }
       }
     }
   }

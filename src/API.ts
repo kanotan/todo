@@ -71,7 +71,7 @@ export type Board = {
 
 export type ModelPostConnection = {
   __typename: "ModelPostConnection",
-  items?:  Array<Post | null > | null,
+  items:  Array<Post >,
   nextToken?: string | null,
 };
 
@@ -181,22 +181,8 @@ export type ModelBoardFilterInput = {
 
 export type ModelBoardConnection = {
   __typename: "ModelBoardConnection",
-  items?:  Array<Board | null > | null,
+  items:  Array<Board >,
   nextToken?: string | null,
-};
-
-export type ModelPostFilterInput = {
-  id?: ModelIDInput | null,
-  title?: ModelStringInput | null,
-  content?: ModelStringInput | null,
-  status?: ModelStatusEnumInput | null,
-  owner?: ModelStringInput | null,
-  createdAt?: ModelStringInput | null,
-  updatedAt?: ModelStringInput | null,
-  boardID?: ModelIDInput | null,
-  and?: Array< ModelPostFilterInput | null > | null,
-  or?: Array< ModelPostFilterInput | null > | null,
-  not?: ModelPostFilterInput | null,
 };
 
 export type ModelStringKeyConditionInput = {
@@ -215,6 +201,96 @@ export enum ModelSortDirection {
 }
 
 
+export type ModelPostFilterInput = {
+  id?: ModelIDInput | null,
+  title?: ModelStringInput | null,
+  content?: ModelStringInput | null,
+  status?: ModelStatusEnumInput | null,
+  owner?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  boardID?: ModelIDInput | null,
+  and?: Array< ModelPostFilterInput | null > | null,
+  or?: Array< ModelPostFilterInput | null > | null,
+  not?: ModelPostFilterInput | null,
+};
+
+export type SearchablePostFilterInput = {
+  id?: SearchableIDFilterInput | null,
+  title?: SearchableStringFilterInput | null,
+  content?: SearchableStringFilterInput | null,
+  owner?: SearchableStringFilterInput | null,
+  createdAt?: SearchableStringFilterInput | null,
+  updatedAt?: SearchableStringFilterInput | null,
+  boardID?: SearchableIDFilterInput | null,
+  and?: Array< SearchablePostFilterInput | null > | null,
+  or?: Array< SearchablePostFilterInput | null > | null,
+  not?: SearchablePostFilterInput | null,
+};
+
+export type SearchableIDFilterInput = {
+  ne?: string | null,
+  gt?: string | null,
+  lt?: string | null,
+  gte?: string | null,
+  lte?: string | null,
+  eq?: string | null,
+  match?: string | null,
+  matchPhrase?: string | null,
+  matchPhrasePrefix?: string | null,
+  multiMatch?: string | null,
+  exists?: boolean | null,
+  wildcard?: string | null,
+  regexp?: string | null,
+  range?: Array< string | null > | null,
+};
+
+export type SearchableStringFilterInput = {
+  ne?: string | null,
+  gt?: string | null,
+  lt?: string | null,
+  gte?: string | null,
+  lte?: string | null,
+  eq?: string | null,
+  match?: string | null,
+  matchPhrase?: string | null,
+  matchPhrasePrefix?: string | null,
+  multiMatch?: string | null,
+  exists?: boolean | null,
+  wildcard?: string | null,
+  regexp?: string | null,
+  range?: Array< string | null > | null,
+};
+
+export type SearchablePostSortInput = {
+  field?: SearchablePostSortableFields | null,
+  direction?: SearchableSortDirection | null,
+};
+
+export enum SearchablePostSortableFields {
+  id = "id",
+  title = "title",
+  content = "content",
+  owner = "owner",
+  createdAt = "createdAt",
+  updatedAt = "updatedAt",
+  boardID = "boardID",
+}
+
+
+export enum SearchableSortDirection {
+  asc = "asc",
+  desc = "desc",
+}
+
+
+export type SearchablePostConnection = {
+  __typename: "SearchablePostConnection",
+  items:  Array<Post >,
+  nextToken?: string | null,
+  total?: number | null,
+};
+
 export type CreateBoardMutationVariables = {
   input: CreateBoardInput,
   condition?: ModelBoardConditionInput | null,
@@ -230,6 +306,17 @@ export type CreateBoardMutation = {
     updatedAt: string,
     posts?:  {
       __typename: "ModelPostConnection",
+      items:  Array< {
+        __typename: "Post",
+        id: string,
+        title: string,
+        content?: string | null,
+        status: StatusEnum,
+        owner: string,
+        createdAt: string,
+        updatedAt: string,
+        boardID: string,
+      } >,
       nextToken?: string | null,
     } | null,
   } | null,
@@ -250,6 +337,17 @@ export type UpdateBoardMutation = {
     updatedAt: string,
     posts?:  {
       __typename: "ModelPostConnection",
+      items:  Array< {
+        __typename: "Post",
+        id: string,
+        title: string,
+        content?: string | null,
+        status: StatusEnum,
+        owner: string,
+        createdAt: string,
+        updatedAt: string,
+        boardID: string,
+      } >,
       nextToken?: string | null,
     } | null,
   } | null,
@@ -270,6 +368,17 @@ export type DeleteBoardMutation = {
     updatedAt: string,
     posts?:  {
       __typename: "ModelPostConnection",
+      items:  Array< {
+        __typename: "Post",
+        id: string,
+        title: string,
+        content?: string | null,
+        status: StatusEnum,
+        owner: string,
+        createdAt: string,
+        updatedAt: string,
+        boardID: string,
+      } >,
       nextToken?: string | null,
     } | null,
   } | null,
@@ -298,6 +407,10 @@ export type CreatePostMutation = {
       owner: string,
       createdAt: string,
       updatedAt: string,
+      posts?:  {
+        __typename: "ModelPostConnection",
+        nextToken?: string | null,
+      } | null,
     } | null,
   } | null,
 };
@@ -325,6 +438,10 @@ export type UpdatePostMutation = {
       owner: string,
       createdAt: string,
       updatedAt: string,
+      posts?:  {
+        __typename: "ModelPostConnection",
+        nextToken?: string | null,
+      } | null,
     } | null,
   } | null,
 };
@@ -352,6 +469,10 @@ export type DeletePostMutation = {
       owner: string,
       createdAt: string,
       updatedAt: string,
+      posts?:  {
+        __typename: "ModelPostConnection",
+        nextToken?: string | null,
+      } | null,
     } | null,
   } | null,
 };
@@ -370,6 +491,17 @@ export type GetBoardQuery = {
     updatedAt: string,
     posts?:  {
       __typename: "ModelPostConnection",
+      items:  Array< {
+        __typename: "Post",
+        id: string,
+        title: string,
+        content?: string | null,
+        status: StatusEnum,
+        owner: string,
+        createdAt: string,
+        updatedAt: string,
+        boardID: string,
+      } >,
       nextToken?: string | null,
     } | null,
   } | null,
@@ -384,14 +516,46 @@ export type ListBoardsQueryVariables = {
 export type ListBoardsQuery = {
   listBoards?:  {
     __typename: "ModelBoardConnection",
-    items?:  Array< {
+    items:  Array< {
       __typename: "Board",
       id: string,
       name: string,
       owner: string,
       createdAt: string,
       updatedAt: string,
-    } | null > | null,
+      posts?:  {
+        __typename: "ModelPostConnection",
+        nextToken?: string | null,
+      } | null,
+    } >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type ListBoardsByOwnerQueryVariables = {
+  owner?: string | null,
+  createdAt?: ModelStringKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelBoardFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListBoardsByOwnerQuery = {
+  listBoardsByOwner?:  {
+    __typename: "ModelBoardConnection",
+    items:  Array< {
+      __typename: "Board",
+      id: string,
+      name: string,
+      owner: string,
+      createdAt: string,
+      updatedAt: string,
+      posts?:  {
+        __typename: "ModelPostConnection",
+        nextToken?: string | null,
+      } | null,
+    } >,
     nextToken?: string | null,
   } | null,
 };
@@ -418,6 +582,10 @@ export type GetPostQuery = {
       owner: string,
       createdAt: string,
       updatedAt: string,
+      posts?:  {
+        __typename: "ModelPostConnection",
+        nextToken?: string | null,
+      } | null,
     } | null,
   } | null,
 };
@@ -431,7 +599,7 @@ export type ListPostsQueryVariables = {
 export type ListPostsQuery = {
   listPosts?:  {
     __typename: "ModelPostConnection",
-    items?:  Array< {
+    items:  Array< {
       __typename: "Post",
       id: string,
       title: string,
@@ -441,31 +609,15 @@ export type ListPostsQuery = {
       createdAt: string,
       updatedAt: string,
       boardID: string,
-    } | null > | null,
-    nextToken?: string | null,
-  } | null,
-};
-
-export type ListBoardsByOwnerQueryVariables = {
-  owner?: string | null,
-  createdAt?: ModelStringKeyConditionInput | null,
-  sortDirection?: ModelSortDirection | null,
-  filter?: ModelBoardFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListBoardsByOwnerQuery = {
-  listBoardsByOwner?:  {
-    __typename: "ModelBoardConnection",
-    items?:  Array< {
-      __typename: "Board",
-      id: string,
-      name: string,
-      owner: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null > | null,
+      board?:  {
+        __typename: "Board",
+        id: string,
+        name: string,
+        owner: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+    } >,
     nextToken?: string | null,
   } | null,
 };
@@ -482,7 +634,7 @@ export type ListPostsByBoardQueryVariables = {
 export type ListPostsByBoardQuery = {
   listPostsByBoard?:  {
     __typename: "ModelPostConnection",
-    items?:  Array< {
+    items:  Array< {
       __typename: "Post",
       id: string,
       title: string,
@@ -492,7 +644,15 @@ export type ListPostsByBoardQuery = {
       createdAt: string,
       updatedAt: string,
       boardID: string,
-    } | null > | null,
+      board?:  {
+        __typename: "Board",
+        id: string,
+        name: string,
+        owner: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+    } >,
     nextToken?: string | null,
   } | null,
 };
@@ -509,7 +669,7 @@ export type ListPostsByOwnerQueryVariables = {
 export type ListPostsByOwnerQuery = {
   listPostsByOwner?:  {
     __typename: "ModelPostConnection",
-    items?:  Array< {
+    items:  Array< {
       __typename: "Post",
       id: string,
       title: string,
@@ -519,9 +679,56 @@ export type ListPostsByOwnerQuery = {
       createdAt: string,
       updatedAt: string,
       boardID: string,
-    } | null > | null,
+      board?:  {
+        __typename: "Board",
+        id: string,
+        name: string,
+        owner: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+    } >,
     nextToken?: string | null,
   } | null,
+};
+
+export type SearchPostsQueryVariables = {
+  filter?: SearchablePostFilterInput | null,
+  sort?: SearchablePostSortInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  from?: number | null,
+};
+
+export type SearchPostsQuery = {
+  searchPosts?:  {
+    __typename: "SearchablePostConnection",
+    items:  Array< {
+      __typename: "Post",
+      id: string,
+      title: string,
+      content?: string | null,
+      status: StatusEnum,
+      owner: string,
+      createdAt: string,
+      updatedAt: string,
+      boardID: string,
+      board?:  {
+        __typename: "Board",
+        id: string,
+        name: string,
+        owner: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+    } >,
+    nextToken?: string | null,
+    total?: number | null,
+  } | null,
+};
+
+export type OnCreateBoardSubscriptionVariables = {
+  owner?: string | null,
 };
 
 export type OnCreateBoardSubscription = {
@@ -534,9 +741,24 @@ export type OnCreateBoardSubscription = {
     updatedAt: string,
     posts?:  {
       __typename: "ModelPostConnection",
+      items:  Array< {
+        __typename: "Post",
+        id: string,
+        title: string,
+        content?: string | null,
+        status: StatusEnum,
+        owner: string,
+        createdAt: string,
+        updatedAt: string,
+        boardID: string,
+      } >,
       nextToken?: string | null,
     } | null,
   } | null,
+};
+
+export type OnUpdateBoardSubscriptionVariables = {
+  owner?: string | null,
 };
 
 export type OnUpdateBoardSubscription = {
@@ -549,9 +771,24 @@ export type OnUpdateBoardSubscription = {
     updatedAt: string,
     posts?:  {
       __typename: "ModelPostConnection",
+      items:  Array< {
+        __typename: "Post",
+        id: string,
+        title: string,
+        content?: string | null,
+        status: StatusEnum,
+        owner: string,
+        createdAt: string,
+        updatedAt: string,
+        boardID: string,
+      } >,
       nextToken?: string | null,
     } | null,
   } | null,
+};
+
+export type OnDeleteBoardSubscriptionVariables = {
+  owner?: string | null,
 };
 
 export type OnDeleteBoardSubscription = {
@@ -564,9 +801,24 @@ export type OnDeleteBoardSubscription = {
     updatedAt: string,
     posts?:  {
       __typename: "ModelPostConnection",
+      items:  Array< {
+        __typename: "Post",
+        id: string,
+        title: string,
+        content?: string | null,
+        status: StatusEnum,
+        owner: string,
+        createdAt: string,
+        updatedAt: string,
+        boardID: string,
+      } >,
       nextToken?: string | null,
     } | null,
   } | null,
+};
+
+export type OnCreatePostSubscriptionVariables = {
+  owner?: string | null,
 };
 
 export type OnCreatePostSubscription = {
@@ -587,8 +839,16 @@ export type OnCreatePostSubscription = {
       owner: string,
       createdAt: string,
       updatedAt: string,
+      posts?:  {
+        __typename: "ModelPostConnection",
+        nextToken?: string | null,
+      } | null,
     } | null,
   } | null,
+};
+
+export type OnUpdatePostSubscriptionVariables = {
+  owner?: string | null,
 };
 
 export type OnUpdatePostSubscription = {
@@ -609,8 +869,16 @@ export type OnUpdatePostSubscription = {
       owner: string,
       createdAt: string,
       updatedAt: string,
+      posts?:  {
+        __typename: "ModelPostConnection",
+        nextToken?: string | null,
+      } | null,
     } | null,
   } | null,
+};
+
+export type OnDeletePostSubscriptionVariables = {
+  owner?: string | null,
 };
 
 export type OnDeletePostSubscription = {
@@ -631,6 +899,10 @@ export type OnDeletePostSubscription = {
       owner: string,
       createdAt: string,
       updatedAt: string,
+      posts?:  {
+        __typename: "ModelPostConnection",
+        nextToken?: string | null,
+      } | null,
     } | null,
   } | null,
 };

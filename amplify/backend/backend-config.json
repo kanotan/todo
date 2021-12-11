@@ -36,7 +36,16 @@
               "userPoolId": "authtodoca22ff71"
             }
           },
-          "additionalAuthenticationProviders": []
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "API_KEY",
+              "apiKeyConfig": {
+                "apiKeyExpirationDays": 365,
+                "apiKeyExpirationDate": "2022-12-12T20:45:35.078Z",
+                "description": ""
+              }
+            }
+          ]
         }
       }
     }
