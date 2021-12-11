@@ -1,0 +1,42 @@
+type Board @model
+  @auth(rules: [
+    { allow: owner, ownerField: "owner", provider: userPools, operations: [read, create, update, delete] },
+    { allow: public, operations: [read] }
+  ])
+  @key(name: "byOwner", fields: ["owner", "createdAt"], queryField: "listBoardsByOwner")
+{
+  id: ID!
+  name: String!
+  owner: String!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  posts: [Post] @connection(keyName: "byBoard", fields: ["id"])
+}
+
+type Post @model
+  @auth(rules: [
+    { allow: owner, ownerField: "owner", provider: userPools, operations: [read, create, update, delete] },
+    { allow: public, operations: [read] }
+  ])
+  @key(name: "byBoard", fields: ["boardID", "createdAt"], queryField: "listPostsByBoard")
+  @key(name: "byOwner", fields: ["owner", "createdAt"], queryField: "listPostsByOwner")
+  @searchable
+{
+  id: ID!
+  title: String!
+  content: String
+  status: StatusEnum!
+  owner: String!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  boardID: ID!
+  board: Board @connection(fields: ["boardID"])
+}
+
+enum StatusEnum {
+  ready,
+  doing,
+  done,
+  onHold,
+  cancelled
+}

@@ -1,0 +1,11 @@
+{
+  "AppSyncApiName": "TodoGql",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authtodoca22ff71",
+      "Outputs.UserPoolId"
+    ]
+  }
+}
