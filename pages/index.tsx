@@ -1,10 +1,27 @@
 import type { NextPage } from 'next'
+import Amplify from 'aws-amplify';
+import awsExports from "../src/aws-exports";
 import Head from 'next/head'
 import Image from 'next/image'
+import React from 'react';
 import styles from '../styles/Home.module.css'
+import { AuthState, onAuthUIStateChange } from '@aws-amplify/ui-components';
+import { AmplifyAuthenticator, AmplifySignUp, AmplifySignOut } from '@aws-amplify/ui-react';
 
-const Home: NextPage = () => {
-  return (
+Amplify.configure({ ...awsExports, ssr: true });
+
+const App: NextPage = () => {
+  const [authState, setAuthState] = React.useState<AuthState>();
+  const [user, setUser] = React.useState<object | undefined>();
+
+  React.useEffect(() => {
+    return onAuthUIStateChange((nextAuthState, authData) => {
+      setAuthState(nextAuthState);
+      setUser(authData);
+    });
+  }, []);
+
+  return authState === AuthState.SignedIn && user ? (
     <div className={styles.container}>
       <Head>
         <title>Create Next App</title>
@@ -12,15 +29,17 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+      <header className={styles.header}>
+        <a href="/">
+          <h1 className={styles.title}>Todoリスト</h1>
+        </a>
+        <AmplifySignOut />
+      </header>
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.tsx</code>
-        </p>
+      <main className={styles.main}>
+        <h2 className={styles.title}>
+          ボード一覧
+        </h2>
 
         <div className={styles.grid}>
           <a href="https://nextjs.org/docs" className={styles.card}>
@@ -66,7 +85,18 @@ const Home: NextPage = () => {
         </a>
       </footer>
     </div>
-  )
+  ) : (
+    <AmplifyAuthenticator>
+      <AmplifySignUp
+        slot="sign-up"
+        formFields={[
+          { type: "username" },
+          { type: "email" },
+          { type: "password" }
+        ]}
+      />
+    </AmplifyAuthenticator>
+  );
 }
 
-export default Home
+export default App
