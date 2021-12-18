@@ -1,6 +1,7 @@
 type Board @model
   @auth(rules: [
     { allow: owner, ownerField: "owner", provider: userPools, operations: [read, create, update, delete] },
+    { allow: private, operations: [read] },
     { allow: public, operations: [read] }
   ])
   @key(name: "byOwner", fields: ["owner", "createdAt"], queryField: "listBoardsByOwner")
@@ -16,6 +17,7 @@ type Board @model
 type Post @model
   @auth(rules: [
     { allow: owner, ownerField: "owner", provider: userPools, operations: [read, create, update, delete] },
+    { allow: private, operations: [read] },
     { allow: public, operations: [read] }
   ])
   @key(name: "byBoard", fields: ["boardID", "createdAt"], queryField: "listPostsByBoard")

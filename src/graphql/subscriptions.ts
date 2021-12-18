@@ -3,8 +3,8 @@
 // this is an auto generated file. This will be overwritten
 
 export const onCreateBoard = /* GraphQL */ `
-  subscription OnCreateBoard($owner: String) {
-    onCreateBoard(owner: $owner) {
+  subscription OnCreateBoard {
+    onCreateBoard {
       id
       name
       owner
@@ -27,8 +27,8 @@ export const onCreateBoard = /* GraphQL */ `
   }
 `;
 export const onUpdateBoard = /* GraphQL */ `
-  subscription OnUpdateBoard($owner: String) {
-    onUpdateBoard(owner: $owner) {
+  subscription OnUpdateBoard {
+    onUpdateBoard {
       id
       name
       owner
@@ -51,8 +51,8 @@ export const onUpdateBoard = /* GraphQL */ `
   }
 `;
 export const onDeleteBoard = /* GraphQL */ `
-  subscription OnDeleteBoard($owner: String) {
-    onDeleteBoard(owner: $owner) {
+  subscription OnDeleteBoard {
+    onDeleteBoard {
       id
       name
       owner
@@ -75,8 +75,8 @@ export const onDeleteBoard = /* GraphQL */ `
   }
 `;
 export const onCreatePost = /* GraphQL */ `
-  subscription OnCreatePost($owner: String) {
-    onCreatePost(owner: $owner) {
+  subscription OnCreatePost {
+    onCreatePost {
       id
       title
       content
@@ -99,8 +99,8 @@ export const onCreatePost = /* GraphQL */ `
   }
 `;
 export const onUpdatePost = /* GraphQL */ `
-  subscription OnUpdatePost($owner: String) {
-    onUpdatePost(owner: $owner) {
+  subscription OnUpdatePost {
+    onUpdatePost {
       id
       title
       content
@@ -123,8 +123,8 @@ export const onUpdatePost = /* GraphQL */ `
   }
 `;
 export const onDeletePost = /* GraphQL */ `
-  subscription OnDeletePost($owner: String) {
-    onDeletePost(owner: $owner) {
+  subscription OnDeletePost {
+    onDeletePost {
       id
       title
       content

@@ -727,10 +727,6 @@ export type SearchPostsQuery = {
   } | null,
 };
 
-export type OnCreateBoardSubscriptionVariables = {
-  owner?: string | null,
-};
-
 export type OnCreateBoardSubscription = {
   onCreateBoard?:  {
     __typename: "Board",
@@ -755,10 +751,6 @@ export type OnCreateBoardSubscription = {
       nextToken?: string | null,
     } | null,
   } | null,
-};
-
-export type OnUpdateBoardSubscriptionVariables = {
-  owner?: string | null,
 };
 
 export type OnUpdateBoardSubscription = {
@@ -787,10 +779,6 @@ export type OnUpdateBoardSubscription = {
   } | null,
 };
 
-export type OnDeleteBoardSubscriptionVariables = {
-  owner?: string | null,
-};
-
 export type OnDeleteBoardSubscription = {
   onDeleteBoard?:  {
     __typename: "Board",
@@ -815,10 +803,6 @@ export type OnDeleteBoardSubscription = {
       nextToken?: string | null,
     } | null,
   } | null,
-};
-
-export type OnCreatePostSubscriptionVariables = {
-  owner?: string | null,
 };
 
 export type OnCreatePostSubscription = {
@@ -847,10 +831,6 @@ export type OnCreatePostSubscription = {
   } | null,
 };
 
-export type OnUpdatePostSubscriptionVariables = {
-  owner?: string | null,
-};
-
 export type OnUpdatePostSubscription = {
   onUpdatePost?:  {
     __typename: "Post",
@@ -875,10 +855,6 @@ export type OnUpdatePostSubscription = {
       } | null,
     } | null,
   } | null,
-};
-
-export type OnDeletePostSubscriptionVariables = {
-  owner?: string | null,
 };
 
 export type OnDeletePostSubscription = {
