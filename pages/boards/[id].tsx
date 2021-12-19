@@ -5,7 +5,9 @@ import type { GetServerSideProps } from 'next'
 import { useRouter } from "next/router";
 import Head from 'next/head'
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react';
+// @ts-ignore
 import styles from '../../styles/Home.module.css'
 import { listPosts } from "../../src/graphql/queries";
 import { createPost } from '../../src/graphql/mutations';
@@ -76,9 +78,9 @@ const App = ({ posts = [] }: { posts: Post[] }) => {
       </Head>
 
       <header className={styles.header}>
-        <a href="/">
+        <Link href="/" passHref>
           <h1 className={styles.title}>Todoリスト</h1>
-        </a>
+        </Link>
         <AmplifySignOut />
       </header>
 

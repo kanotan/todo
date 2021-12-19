@@ -3,7 +3,9 @@ import Amplify from 'aws-amplify';
 import awsExports from "../src/aws-exports";
 import Head from 'next/head'
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react';
+// @ts-ignore
 import styles from '../styles/Home.module.css'
 import { AuthState, onAuthUIStateChange } from '@aws-amplify/ui-components';
 import { AmplifyAuthenticator, AmplifySignUp, AmplifySignOut } from '@aws-amplify/ui-react';
@@ -30,15 +32,15 @@ const App: NextPage = () => {
       </Head>
 
       <header className={styles.header}>
-        <a href="/">
+        <Link href="/" passHref>
           <h1 className={styles.title}>Todoリスト</h1>
-        </a>
+        </Link>
         <AmplifySignOut />
       </header>
 
       <main className={styles.main}>
         <h2 className={styles.title}>
-          ボード一覧は<a href="/boards">こちら</a>
+          ボード一覧は<Link href="/boards" passHref>こちら</Link>
         </h2>
       </main>
 

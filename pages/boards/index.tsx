@@ -4,7 +4,9 @@ import awsExports from "../../src/aws-exports";
 import type { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react';
+// @ts-ignore
 import styles from '../../styles/Home.module.css'
 import { listBoards } from '../../src/graphql/queries';
 import { createBoard } from '../../src/graphql/mutations';
@@ -70,9 +72,9 @@ const App = ({ boards = [] }: { boards: Board[] }) => {
       </Head>
 
       <header className={styles.header}>
-        <a href="/">
+        <Link href="/" passHref>
           <h1 className={styles.title}>Todoリスト</h1>
-        </a>
+        </Link>
         <AmplifySignOut />
       </header>
 
