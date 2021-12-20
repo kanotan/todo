@@ -12,7 +12,7 @@ frontend:
         - nvm install 16 #安定版を利用
         - curl -o- -L https://yarnpkg.com/install.sh | bash #安定版を再インストール
         - yarn install
-        - yarn run jest
+        # - yarn run jest
     build:
       commands:
         - yarn run build
