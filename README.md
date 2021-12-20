@@ -33,7 +33,19 @@ yarn run dev # http://localhost:3000/ にてコマンドの実行が可能
 
 ## APIテスト
 
+### 単体テスト
+
 ```bash
 yarn
 yarn run jest
 ```
+
+### E2Eテスト
+
+```bash
+npx cypress open
+```
+
+事前に.gitignoreに追加されたcypress.jsonを追加する必要がある(環境変数にパスワードが記載されているため)
+
+表示されたメニューからテスト項目(例: authenticator_spec.js)などをクリック
